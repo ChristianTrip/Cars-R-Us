@@ -1,5 +1,9 @@
-package dat3.rename_me.configuration;
+package dat3.cars_r_us.configuration;
 
+import dat3.cars_r_us.entity.Car;
+import dat3.cars_r_us.entity.Member;
+import dat3.cars_r_us.repository.CarRepository;
+import dat3.cars_r_us.repository.MemberRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
 import org.springframework.boot.ApplicationArguments;
@@ -11,10 +15,17 @@ import dat3.security.repository.UserWithRolesRepository;
 public class SetupDevUsers implements ApplicationRunner {
 
     UserWithRolesRepository userWithRolesRepository;
+    MemberRepository memberRepository;
+    CarRepository carRepository;
+
     String passwordUsedByAll;
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository) {
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository,
+                         MemberRepository memberRepository,
+                         CarRepository carRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
+        this.memberRepository = memberRepository;
+        this.carRepository = carRepository;
         passwordUsedByAll = "test12";
     }
 
@@ -36,12 +47,22 @@ public class SetupDevUsers implements ApplicationRunner {
         UserWithRoles user1 = new UserWithRoles("user1", passwordUsedByAll, "user1@a.dk");
         UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@a.dk");
         UserWithRoles user3 = new UserWithRoles("user3", passwordUsedByAll, "user3@a.dk");
-        user1.addRole(Role.USER);
+        UserWithRoles user4 = new UserWithRoles("user4", passwordUsedByAll, "user4@a.dk");
         user1.addRole(Role.ADMIN);
         user2.addRole(Role.USER);
         user3.addRole(Role.ADMIN);
+        user4.addRole(Role.ADMIN);
         userWithRolesRepository.save(user1);
         userWithRolesRepository.save(user2);
         userWithRolesRepository.save(user3);
+        userWithRolesRepository.save(user4);
+
+        Member member1 = new Member("user5", passwordUsedByAll, "user5@a.dk", "Hank");
+        member1.setLastName("Williams");
+        member1.addRole(Role.USER);
+        memberRepository.save(member1);
+
+        Car car1 = new Car("Testa", "Model 1", 1000, false);
+        carRepository.save(car1);
     }
 }
