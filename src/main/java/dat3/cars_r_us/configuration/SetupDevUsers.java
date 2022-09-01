@@ -57,10 +57,12 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user3);
         userWithRolesRepository.save(user4);
 
-        Member member1 = new Member("user5", passwordUsedByAll, "user5@a.dk", "Hank");
-        member1.setLastName("Williams");
+        Member member1 = new Member("user5", "Password1234", "trip@mail.dk", "Christian", "Trip", "Holmbladsgade 80", "København S", "2300");
+        Member member2 = new Member("user6", "Password1234", "hank@mail.dk", "Hank", "Williams", "Vestparken 61", "Oksbøl", "6840");
         member1.addRole(Role.USER);
+        member2.addRole(Role.USER);
         memberRepository.save(member1);
+        memberRepository.save(member2);
 
         Car car1 = new Car("Testa", "Model 1", 1000, false);
         carRepository.save(car1);

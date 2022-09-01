@@ -1,30 +1,33 @@
 package dat3.cars_r_us.entity;
 
 import dat3.security.entity.UserWithRoles;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.ToString;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 @Entity
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 public class Member extends UserWithRoles{
 
-
+    @Column(length = 30)
     private String firstName;
-
+    @Column(length = 50)
     private String lastName;
-
+    @Column(length = 50)
     private String street;
-
+    @Column(length = 50)
     private String city;
-
+    @Column(length = 50)
     private String zip;
 
     private boolean approved;
-
     private int ranking;
 
 
@@ -33,77 +36,17 @@ public class Member extends UserWithRoles{
         this.firstName = firstName;
     }
 
+    public Member(String user, String password, String email, String firstName, String lastName, String street, String city, String zip) {
+        super(user, password, email);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.street = street;
+        this.city = city;
+        this.zip = zip;
+    }
 
     public Member() {
     }
 
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
-
-    public boolean isApproved() {
-        return approved;
-    }
-
-    public void setApproved(boolean approved) {
-        this.approved = approved;
-    }
-
-    public int getRanking() {
-        return ranking;
-    }
-
-    public void setRanking(int ranking) {
-        this.ranking = ranking;
-    }
-
-    @Override
-    public String toString() {
-        return "Member{" +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", street='" + street + '\'' +
-                ", city='" + city + '\'' +
-                ", zip='" + zip + '\'' +
-                ", approved=" + approved +
-                ", ranking=" + ranking +
-                "} " + super.toString();
-    }
 }

@@ -1,0 +1,17 @@
+body{
+    margin: 0;
+    font-family: 'Roboto Mono',serif;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+header{
+    width: 100%;
+    margin: 0 auto;
+    background-color: seagreen;
+    color: white;
+}
+
+main{
+
+}
