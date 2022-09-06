@@ -6,8 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,6 +31,12 @@ public class Member extends UserWithRoles{
     private boolean approved;
     private int ranking;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Rental> rentals = new ArrayList<>();
+
 
     public Member(String user, String password, String email, String firstName){
         super(user, password, email);
@@ -48,5 +55,9 @@ public class Member extends UserWithRoles{
     public Member() {
     }
 
+    public void addReservation(Reservation reservation){
+        reservations.add(reservation);
+        reservation.setMember(this);
+    }
 
 }

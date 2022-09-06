@@ -1,10 +1,9 @@
 package dat3.cars_r_us.api;
 
-import dat3.cars_r_us.dto.MemberResponse;
 import dat3.cars_r_us.dto.MemberRequest;
-import dat3.cars_r_us.entity.Member;
-import dat3.cars_r_us.repository.MemberRepository;
+import dat3.cars_r_us.dto.MemberResponse;
 import dat3.cars_r_us.service.MemberService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,35 +14,16 @@ import java.util.List;
 public class MemberController {
 
     MemberService memberService;
-    MemberRepository memberRepository;
 
-    public MemberController(MemberService memberService, MemberRepository memberRepository) {
+    public MemberController(MemberService memberService) {
         this.memberService = memberService;
-        this.memberRepository = memberRepository;
     }
 
 
-    @GetMapping("/all")
-    public List<Member> getAllMembers(){
-        return memberRepository.findAll();
-    }
-
-    // Security ADMIN
-    @GetMapping
-    public List<MemberResponse> getMembers(){
-        return memberService.findMembers();
-    }
-
-    // Security ADMIN
-    @GetMapping(path = "/{username}")
-    public MemberResponse getMemberById(@PathVariable String username) throws Exception{
-
-        System.out.println("jsfhddfgdgd" + username);
-        return memberService.findMemberByUsername(username);
-    }
+    //Security USER
+    //----------------------------------------------------
 
     // kommer ind som JSON
-    // Security -> USER
     //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     @PostMapping
     public MemberResponse addMember(@RequestBody MemberRequest body){
@@ -52,13 +32,32 @@ public class MemberController {
 
 
 
-    @PutMapping(path = "/{username}")
-    ResponseEntity<Boolean> editMember(@RequestBody MemberRequest body, @PathVariable String userName){
-        return null;
+    //Security ADMIN
+    //----------------------------------------------------
+
+    @GetMapping("/admin/all")
+    public List<MemberResponse> getMembers(){
+        return memberService.findMembers();
+    }
+
+    @GetMapping(path = "/admin/{username}")
+    public MemberResponse getMemberById(@PathVariable String username) throws Exception{
+        return memberService.findMemberByUsername(username);
+    }
+
+    @PutMapping("/{username}")
+    public ResponseEntity<Boolean> editMember(@RequestBody MemberRequest body, @PathVariable String username){
+        memberService.editMember(body,username);
+        return new ResponseEntity(true, HttpStatus.OK);
+    }
+
+    @PatchMapping("/admin/ranking/{username}/{ranking}")
+    public void setRanking(@PathVariable String username, @PathVariable int ranking){
+        memberService.setRankingForUser(username, ranking);
     }
 
     @DeleteMapping("/{username}")
-    void deleteMemberByUserName(@PathVariable String userName){
-
+    void deleteMemberByUserName(@PathVariable String username){
+        memberService.deleteByUsername(username);
     }
 }

@@ -19,13 +19,12 @@ import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInA
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-
 @DataJpaTest // betyder at den bruger inMemory database, i dette tilfælde h2 databasen
 class MemberServiceMockWithH2Test {
 
-    public  MemberService memberService;
+    public MemberService memberService;
 
-    public  static MemberRepository memberRepository;
+    public static MemberRepository memberRepository;
 
     @BeforeAll
     public static void setupData(@Autowired MemberRepository member_Repository){
@@ -51,7 +50,7 @@ class MemberServiceMockWithH2Test {
 
     @Test
     void getMembers() {
-        List<MemberResponse> response = memberService.getMembers();
+        List<MemberResponse> response = memberService.findMembers();
         assertEquals(2,response.size());
         assertThat(response, containsInAnyOrder(hasProperty("email", is("m1@a.dk")), hasProperty("email", is("mm@a.dk"))));
     }

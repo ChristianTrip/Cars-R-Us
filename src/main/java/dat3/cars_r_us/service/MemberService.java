@@ -21,6 +21,7 @@ public class MemberService {
     this.memberRepository = memberRepository;
   }
 
+
   /*
   public MemberResponse addMember(MemberRequest memberRequest){
     //Later you should add error checks --> Missing arguments, email taken etc.
@@ -55,13 +56,6 @@ public class MemberService {
         memberRepository.save(member);
       }
 
-      public List<MemberResponse> getMembers() {
-        List<Member> members = memberRepository.findAll();
-        List<MemberResponse> response =
-                members.stream().map(member -> new MemberResponse(member,false)).collect(Collectors.toList());
-        return response;
-      }
-
       public MemberResponse findMemberByUsername(String username) throws Exception {
         Member found = memberRepository.findById(username).orElseThrow(
                 ()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found"));
@@ -80,7 +74,8 @@ public class MemberService {
 
     public List<MemberResponse> findMembers() {
       List<Member> members = memberRepository.findAll();
-      List<MemberResponse> responses = members.stream().map(member -> new MemberResponse(member, false)).collect(Collectors.toList());
+      List<MemberResponse> responses =
+              members.stream().map(member -> new MemberResponse(member, false)).collect(Collectors.toList());
 
       return responses;
     }

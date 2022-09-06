@@ -19,6 +19,8 @@ public class SimpleSanitizer {
 
     //Lav en testklasse for ovenstående klasse og tilføj denne test til klassen
 
+
+
     public static void main(String[] args) {
         String toTest = "Hello <b>World</b>";
         String result = simpleSanitize(toTest);

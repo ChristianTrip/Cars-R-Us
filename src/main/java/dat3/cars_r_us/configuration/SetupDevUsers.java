@@ -66,5 +66,7 @@ public class SetupDevUsers implements ApplicationRunner {
 
         Car car1 = new Car("Testa", "Model 1", 1000, false);
         carRepository.save(car1);
+
+
     }
 }
