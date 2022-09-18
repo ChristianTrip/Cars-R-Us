@@ -3,11 +3,13 @@ package dat3.cars_r_us.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import dat3.cars_r_us.entity.Member;
+import dat3.cars_r_us.entity.Reservation;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -30,6 +32,8 @@ public class MemberResponse {
   @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
   private LocalDateTime edited;
   private Integer ranking;
+
+  private ArrayList<Reservation> reservations;
 
   //Convert Member Entity to Member DTO
   public MemberResponse(Member m, boolean includeAll) {

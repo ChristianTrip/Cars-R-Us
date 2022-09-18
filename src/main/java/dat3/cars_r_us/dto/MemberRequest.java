@@ -19,9 +19,6 @@ public class MemberRequest {
   private String city;
   private String zip;
 
-  public static Member getMemberEntity(MemberRequest m){
-    return new Member(m.username,m.getPassword(),m.getEmail(), m.firstName, m.lastName,m.getStreet(), m.getCity(), m.getZip());
-  }
 
   // Member to MemberRequest conversion
   public MemberRequest(Member m){
@@ -31,5 +28,10 @@ public class MemberRequest {
     this.street = m.getStreet();
     this.city = m.getCity();
     this.zip = m.getZip();
+  }
+
+
+  public static Member getMemberEntity(MemberRequest m){
+    return new Member(m.username, m.getPassword(), m.getEmail(), m.firstName, m.lastName, m.getStreet(), m.getCity(), m.getZip());
   }
 }

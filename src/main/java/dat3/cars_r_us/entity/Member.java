@@ -56,8 +56,8 @@ public class Member extends UserWithRoles{
     }
 
     public void addReservation(Reservation reservation){
-        reservations.add(reservation);
         reservation.setMember(this);
+        reservations.add(reservation);
     }
 
 }

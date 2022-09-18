@@ -27,7 +27,9 @@ public class Reservation {
     private LocalDateTime reservationDate;
     private LocalDate rentalDate;
 
-    public Reservation(LocalDate rentalDate) {
+    public Reservation(Member member, Car car, LocalDate rentalDate) {
+        this.member = member;
+        this.car = car;
         this.rentalDate = rentalDate;
     }
 
