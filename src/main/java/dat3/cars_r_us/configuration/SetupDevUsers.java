@@ -25,6 +25,7 @@ public class SetupDevUsers implements ApplicationRunner {
 
     private String passwordUsedByAll;
 
+
     public SetupDevUsers(UserWithRolesRepository userWithRolesRepository,
                          MemberRepository memberRepository,
                          CarRepository carRepository,
